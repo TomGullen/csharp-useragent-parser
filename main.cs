@@ -15,8 +15,8 @@ namespace v2.Tracker
         public Browser Browser { get; private set; }
         public Architecture Architecture { get; private set; }
         public OperatingSystem OperatingSystem { get; private set; }
-        public Crawler Crawler { get; private set; }
-        public bool IsCrawler { get; private set; }
+        //public Crawler Crawler { get; private set; }
+        //public bool IsCrawler { get; private set; }
         public List<string> URLs { get; private set; }
 
         public UserAgentInfo()
@@ -33,8 +33,8 @@ namespace v2.Tracker
             Browser = Parser.GetBrowser(userAgent);
             Architecture = Parser.GetArchitecture(userAgent);
             OperatingSystem = Parser.GetOperatingSystem(userAgent);
-            Crawler = Parser.GetCrawler(userAgent);
-            IsCrawler = Crawler != Crawler.NotCrawler;
+            //Crawler = Parser.GetCrawler(userAgent);
+            //IsCrawler = Crawler != Crawler.NotCrawler;
             URLs = Parser.GetUrls(userAgent);
         }
     }
