@@ -18,6 +18,7 @@ namespace v2.Tracker
         //public Crawler Crawler { get; private set; }
         //public bool IsCrawler { get; private set; }
         public List<string> URLs { get; private set; }
+        //public Device Device { get; private set; }
 
         public UserAgentInfo()
         {
@@ -36,7 +37,13 @@ namespace v2.Tracker
             //Crawler = Parser.GetCrawler(userAgent);
             //IsCrawler = Crawler != Crawler.NotCrawler;
             URLs = Parser.GetUrls(userAgent);
+            //Device = Parser.GetDevice(userAgent);
         }
+    }
+
+    public enum Device
+    {
+        PC = 0
     }
 
     public enum Crawler
@@ -254,6 +261,14 @@ namespace v2.Tracker
 
     public class Parser
     {
+        /// <summary>
+        /// Return device for given user agent string
+        /// </summary>
+        public static Device GetDevice(string userAgent)
+        {
+            return Device.PC;
+        }
+
         /// <summary>
         /// Return a list of URLS found in the user agent string
         /// http://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
