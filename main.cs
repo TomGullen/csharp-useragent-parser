@@ -40,13 +40,21 @@ namespace v2.Tracker
     {
         /// <summary>
         /// Get corresponding system architecture for given user agent
+        /// http://stackoverflow.com/a/13709431/356635
         /// </summary>
         public static Architecture GetArchitecture(string userAgent)
         {
-            if (userAgent.IndexOf("wow64", StringComparison.CurrentCultureIgnoreCase) != -1
+            if (userAgent.IndexOf("x86_64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("x86-64", StringComparison.CurrentCultureIgnoreCase) != -1
                 || userAgent.IndexOf("win64", StringComparison.CurrentCultureIgnoreCase) != -1
-                || userAgent.IndexOf("i686", StringComparison.CurrentCultureIgnoreCase) != -1
-                || userAgent.IndexOf("x64", StringComparison.CurrentCultureIgnoreCase) != -1)
+                || userAgent.IndexOf("x64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("amd64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("wow64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("x64_64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("ia64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("sparc64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("ppc64", StringComparison.CurrentCultureIgnoreCase) != -1
+                || userAgent.IndexOf("irix64", StringComparison.CurrentCultureIgnoreCase) != -1)
                 return Architecture.x64;
             return Architecture.x32;
         }
