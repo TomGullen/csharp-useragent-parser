@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
+using System.Windows.Forms;
 
 namespace v2.Tracker
 {
@@ -14,6 +17,7 @@ namespace v2.Tracker
         public OperatingSystem OperatingSystem { get; private set; }
         public Crawler Crawler { get; private set; }
         public bool IsCrawler { get; private set; }
+        public List<string> URLs { get; private set; }
 
         public UserAgentInfo()
         {
@@ -31,6 +35,7 @@ namespace v2.Tracker
             OperatingSystem = Parser.GetOperatingSystem(userAgent);
             Crawler = Parser.GetCrawler(userAgent);
             IsCrawler = Crawler != Crawler.NotCrawler;
+            URLs = Parser.GetUrls(userAgent);
         }
     }
 
@@ -249,6 +254,23 @@ namespace v2.Tracker
 
     public class Parser
     {
+        /// <summary>
+        /// Return a list of URLS found in the user agent string
+        /// http://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
+        /// </summary>
+        public static List<string> GetUrls(string userAgent)
+        {
+            var urls = new List<string>();
+
+            var linkParser = new Regex(@"\b(?:http://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            foreach (Match m in linkParser.Matches(userAgent))
+            {
+                urls.Add(m.Value);
+            }
+
+            return urls;
+        } 
+
         /// <summary>
         /// Get corresponding system architecture for given user agent
         /// http://stackoverflow.com/a/228267/356635
